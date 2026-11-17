@@ -1,0 +1,10 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // auctionRooms and auctionProfiles are read and written by the game's Cloud Function.
+    // The browser uses validated API responses and never contacts Firestore directly.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
